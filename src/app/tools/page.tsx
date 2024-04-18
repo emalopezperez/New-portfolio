@@ -72,7 +72,7 @@ export default function Tools() {
               {tool.category}
             </span>
             <div className="z-10">
-              <PencilRuler className="h-5  w-5 fill-gray-100" />
+              <PencilRuler className="h-5  w-5 fill-[#ece3e1]" />
             </div>
             <h2 className="mt-6 text-base font-semibold text-zinc-800 dark:text-zinc-100">
               <Card.Link href={tool.link.href}>{tool.name}</Card.Link>

@@ -26,13 +26,15 @@ const CardProject = ({ project, key }: PropsProject) => {
       </span>
 
       <div className="z-10 ">
-        <SquareCode />
+        <SquareCode className="" />
       </div>
 
       <h2 className="mt-8 text-base font-semibold text-zinc-800 dark:text-zinc-100">
         <Card.Link href={github.href}>{name}</Card.Link>
       </h2>
-      <Card.Description>{description}</Card.Description>
+      <Card.Description>
+        <div className="h-[70px]">{description}</div>
+      </Card.Description>
       <p className="relative z-10 mt-6 flex text-sm font-medium text-zinc-400 transition group-hover:text-teal-500 dark:text-zinc-200">
         <GitHubIcon className=" h-6 w-6" />
         <span className="ml-2">{github.label}</span>
