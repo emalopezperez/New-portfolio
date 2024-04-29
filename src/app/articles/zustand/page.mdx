@@ -1,4 +1,5 @@
 import { ArticleLayout } from '@/components/shared/ArticleLayout'
+import bear from '../zustand/img/bear.jpg'
 
 export const article = {
   author: 'Emanuel Lopez',
@@ -14,6 +15,8 @@ export const metadata = {
 }
 
 export default (props) => <ArticleLayout article={article} {...props} />
+
+<Image src={bear} alt="" />
 
 Zustand es una biblioteca diseñada para gestionar estados en aplicaciones desarrolladas con React. Ofrece una API sencilla pero poderosa que facilita el control del estado de la aplicación. A diferencia de otras bibliotecas como Redux, Zustand elimina la necesidad de acciones, reductores y middleware complejos, lo que la convierte en una opción ideal para proyectos de cualquier envergadura.
 
