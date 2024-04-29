@@ -1,0 +1,135 @@
+import { ArticleLayout } from '@/components/shared/ArticleLayout'
+
+export const article = {
+  author: 'Emanuel Lopez',
+  date: '2024-04-02',
+  title: 'Zustand',
+  description:
+    'Zustand es una biblioteca diseñada para gestionar estados en aplicaciones desarrolladas con React. Ofrece una API sencilla pero poderosa que facilita el control del estado de la aplicación. A diferencia de otras bibliotecas como Redux, Zustand elimina la necesidad de acciones, reductores y middleware complejos, lo que la convierte en una opción ideal para proyectos de cualquier envergadura.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+Zustand es una biblioteca diseñada para gestionar estados en aplicaciones desarrolladas con React. Ofrece una API sencilla pero poderosa que facilita el control del estado de la aplicación. A diferencia de otras bibliotecas como Redux, Zustand elimina la necesidad de acciones, reductores y middleware complejos, lo que la convierte en una opción ideal para proyectos de cualquier envergadura.
+
+Una de las razones por las que Zustand destaca es su enfoque minimalista. Al no requerir una configuración extensa ni abstracciones complejas, puede integrarse de manera más fluida en proyectos React existentes y permite a los desarrolladores comenzar a trabajar rápidamente sin tener que preocuparse por configuraciones complicadas. Además, debido a su tamaño reducido, las aplicaciones que utilizan Zustand tienden a ser más livianas y más eficientes en términos de rendimiento.
+
+## Instalación y Configuración Básica
+
+```
+npm install zustand
+```
+
+## Creación del store
+
+```ts
+///stores/counter/counter-store/
+
+import { create } from 'zustand'
+
+interface CounterState {
+  counter: number
+  increaseCounter: (quantity: number) => void
+  decrementCounter: (quantity: number) => void
+}
+
+export const useCounterStore = create<CounterState>((set) => ({
+  counter: 0,
+
+  increaseCounter: (quantity: number = 1) =>
+    set((state) => ({ counter: state.counter + quantity })),
+
+  decrementCounter: (quantity: number = 1) =>
+    set((state) => ({ counter: state.counter - quantity })),
+}))
+```
+
+## Consumir store
+
+```tsx
+import { useCounterStore } from '../../stores/counter/counter-store'
+
+export const CounterPage = () => {
+  const counter = useCounterStore((state) => state.counter)
+  const increaseCounter = useCounterStore((state) => state.increaseCounter)
+  const decrementCounter = useCounterStore((state) => state.decrementCounter)
+
+  return (
+    <section className="flex h-full w-full items-center justify-center">
+           {' '}
+      <div className="">
+                <h2>counter</h2>       {' '}
+        <div className="mt-8 flex flex-col md:flex-row">
+                    <button onClick={() => increaseCounter(1)}> +1</button>     
+              <span className="mx-2 text-3xl lg:mx-10"> {counter} </span>       
+            <button onClick={() => decrementCounter(1)}>-1</button>       {' '}
+        </div>
+             {' '}
+      </div>
+         {' '}
+    </section>
+  )
+}
+```
+
+### Explicación:
+
+## Creación del store
+
+En esta sección, definimos un store de Zustand el cual llamamos `useCounterStore`. Este store mantiene un estado que consta de un contador (`counter`) y dos métodos para incrementar (`increaseCounter`) y decrementar (`decrementCounter`) el contador.
+
+## Consumir el store
+
+Utilizamos el hook `useCounterStore` para acceder al estado del contador y a los métodos `increaseCounter` y `decrementCounter`. Luego, en el componente `CounterPage`, mostramos el valor del contador y proporcionas botones para incrementar y decrementar el contador. Cuando se hace clic en estos botones, se llaman a los métodos correspondientes del store para actualizar el estado del contador.
+
+## Prevenir re-renderizaciones innecesarios
+
+El hook `useShallow` se usa para evitar que los componentes vuelvan a renderizarse innecesariamente si las propiedades del estado no han cambiado superficialmente. Esto significa que si el estado se mantiene igual en términos de referencias de objetos, no se volverá a renderizar el componente, incluso si los valores internos del estado han cambiado.
+
+Al utilizar `useShallow`, puedes optimizar el rendimiento de tu aplicación al evitar re-renderizaciones costosas cuando no hay cambios significativos en el estado. Esto es especialmente útil cuando trabajas con objetos grandes o profundamente anidados en el estado, donde solo unos pocos valores pueden cambiar en cada actualización, pero la estructura general del objeto permanece igual. El `useShallow` se va encargar de analizar las propiedades del objeto, y confirmar si cambiaron, si cambiaron lo va a volver a renderizar, y si no cambiaron no va a hacer nada.
+
+### Ejemplo
+
+```ts
+import { create } from 'zustand'
+
+interface UserState {
+  user: {
+    name: string
+    age: number
+  }
+  updateUser: (newUser: { name: string; age: number }) => void
+}
+
+export const useUserStore = create<UserState>((set) => ({
+  user: { name: 'John', age: 30 },
+  updateUser: (newUser) => set({ user: newUser }),
+}))
+```
+
+```tsx
+import { useUserStore } from './useUserStore'
+import { useShallow } from 'zustand/react/shallow'
+
+const UserProfile = () => {
+  const name = useShallow(useUserStore((state) => state.user.name))
+
+  return (
+    <div>
+      <h2>User Profile</h2>
+      <p>Name: {name}</p>
+    </div>
+  )
+}
+
+export default UserProfile
+```
+
+### Explicación:
+
+Con `useShallow`, el componente `UserProfile` solo se volverá a renderizar cuando el nombre del usuario cambie, ignorando cambios en otras propiedades del objeto `user`, como la edad.
