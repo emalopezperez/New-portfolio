@@ -4,6 +4,16 @@ import CardProject from '@/components/projects/CardProject'
 
 const projects = [
   {
+    name: 'DolceDress',
+    description:
+      'Este proyecto es un eCommerce construido con Next.js, TypeScript, Tailwind CSS, Zustand, PostgreSQL y Prisma.',
+    github: {
+      href: 'https://dolce-dress-e-commerce-app.vercel.app',
+      label: 'DolceDress.com',
+    },
+    category: 'FullStack',
+  },
+  {
     name: 'App.movies',
     description:
       'Aplicación full stack de películas. Desarrollada con Node.js, Express, MongoDB, React, TypeScript, Sass y Tailwind CSS.',
@@ -14,12 +24,12 @@ const projects = [
     category: 'Frontend',
   },
   {
-    name: 'DolceDress',
+    name: 'Ecommerce',
     description:
-      'Aplicación backend para un e-commerce desarrollado con Node.js, Express y MongoDB ',
+      'Backend para un e-commerce desarrollado con Node.js, Express y MongoDB.',
     github: {
       href: 'https://github.com/emalopezperez/backend-ecommerce-DolceDress',
-      label: 'DolceDress.com',
+      label: 'ecommerce.com',
     },
     category: 'Backend',
   },
@@ -36,10 +46,19 @@ const projects = [
   {
     name: 'Clone AirBnb',
     description:
-      'Este proyecto es un clon de la interfaz de usuario de Airbnb, construido con Next.js, Tailwind CSS y Sanity',
+      'Este proyecto es un clon de la interfaz de usuario de Airbnb, construido con Next.js, Tailwind CSS y Sanity.',
     github: {
       href: 'https://github.com/emalopezperez/frontend-clone-AirBnb',
       label: 'clone-air-bnb.com',
+    },
+    category: 'FullStack',
+  },
+  {
+    name: 'Clone Netflix',
+    description: 'Este es un clon de Netflix construido con React js.',
+    github: {
+      href: 'https://clone-netflix-react-js-black.vercel.app',
+      label: 'clone-netflix.com',
     },
     category: 'FullStack',
   },
